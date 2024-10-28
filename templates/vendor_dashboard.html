@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendor Dashboard</title>
+    <style>
+        body {
+            background: url(/static/img/bg.jpeg) no-repeat center center fixed;
+            background-size: cover;
+            animation: myAnimation 10s infinite;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        @keyframes myAnimation {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .logo {
+            width: 10%;
+            height: auto;
+            margin-right: 40px;
+        }
+
+        header {
+            background-color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            max-width: 100%;
+            max-height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+        .profile-menu{
+            display: flex;
+            align-items: center;
+        }
+
+        .add-icon {
+            cursor: pointer;
+            background-color: #7ec0ee;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 3px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-left: 800px;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center;
+            margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"], textarea, select {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            color: black;
+        }
+
+        button[type="submit"], input[type="submit"] {
+            background-color: #7ec0ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 60%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #648fae;
+        }
+        input[type="submit"]:hover {
+            background-color: #648fae;
+        }
+
+        a, p {
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+        }
+        .Welcome{
+            color:rgba(0, 0, 0, 0.9)
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            width: 250px;
+            cursor: pointer;
+            text-align: left;
+            color: white;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 550px;
+            text-align: center;
+            overflow: auto;
+            height: 400px;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: red;
+        }
+        .profile-icon{
+            width: 50px;
+        }
+        .profile-menu {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    z-index: 2;
+}
+
+.profile-dropdown a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.profile-dropdown a:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/static/img/logo.jpeg" alt="Bid-It Logo" class="logo">
+        <div class="header-content">
+            <h2>Vendor Dashboard</h2>
+            <div class="add-icon" onclick="openAddTenderForm()">Add Tender</div>
+        </div>
+        <div class="profile-menu">
+            <img src="/static/img/user-profile.jpg" alt="Profile Icon" class="profile-icon" onclick="toggleProfileMenu()">
+            <div id="profileDropdown" class="profile-dropdown">
+                <a href="/get_user_details" onclick="showUserDetails()">User Details</a>
+                <a href="/">Logout</a>
+            </div>
+        </div>
+    </header>
+    <h2 class="Welcome">Welcome, {{session['username']}}</h2>
+    <br><br>
+    <div class="container">
+        <h2>Bids created by you</h2>
+        <div class="content">
+            {% if tenders %}
+                {% for tender in tenders %}
+                    <div class="card" onclick="showDetails('{{ tender[0] }}', '{{ tender[1] }}', '{{ tender[2] }}', '{{ tender[3] }}', '{{ tender[4] }}', '{{ tender[5] }}', '{{ tender[6] }}')">
+                        <h3>{{ tender[1] }}</h3>
+                        <p>{{ tender[2] }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No tenders found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Add Tender Modal -->
+    <div id="addTenderModal" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeAddTenderForm()">&times;</span>
+            <h2>Add Tender</h2>
+            <form id="tenderForm" method="post" action="{{ url_for('add_tender') }}">
+                <label for="tenderName">Tender Name:</label>
+                <input type="text" id="tenderName" name="tenderName" required>
+
+                <label for="tenderDescription">Tender Description:</label>
+                <textarea id="tenderDescription" name="tenderDescription" rows="4" required></textarea>
+
+                <label for="tenderType">Tender Type:</label>
+                <select id="tenderType" name="tenderType" required>
+                    <option value="open">Open</option>
+                    <option value="restricted">Restricted</option>
+                    <option value="negotiated">Negotiated</option>
+                </select>
+
+                <label for="issueDate">Issue Date:</label>
+                <input type="date" id="issueDate" name="issueDate" required>
+
+                <label for="submissionDeadline">Submission Deadline:</label>
+                <input type="date" id="submissionDeadline" name="submissionDeadline" required>
+
+                <label for="priority1">Priority 1:</label>
+                <select id="priority1" name="priority1" required>
+                    <option value="cost">Cost</option>
+                    <option value="timeline">Timeline</option>
+                    <option value="quality">Quality</option>
+                </select>
+
+                <label for="priority2">Priority 2:</label>
+                <select id="priority2" name="priority2" required>
+                    <option value="cost">Cost</option>
+                    <option value="timeline">Timeline</option>
+                    <option value="quality">Quality</option>
+                </select>
+
+                <label for="priority3">Priority 3:</label>
+                <select id="priority3" name="priority3" required>
+                    <option value="cost">Cost</option>
+                    <option value="timeline">Timeline</option>
+                    <option value="quality">Quality</option>
+                </select>
+                <br><br>
+                <button type="submit">Submit Tender</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tender Details Modal -->
+    <div id="tenderDetailsModal" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeTenderDetailsForm()">&times;</span>
+            <h2>Tender Details</h2>
+            <form id="result" method="post" ></form>
+            <p id="tenderNameDetail"></p>
+            <p id="tenderDescriptionDetail"></p>
+            <p id="tenderTypeDetail"></p>
+            <p id="issueDateDetail"></p>
+            <p id="submissionDeadlineDetail"></p>
+            <p id="statusDetail"></p>
+            <input type="submit" onclick="result()" value="Close Tender">
+                
+        </div>
+    </div>
+
+
+
+    <script>
+const profileIcon = document.querySelector('.profile-icon');
+profileIcon.addEventListener('click', toggleProfileMenu);
+
+const tenderForm = document.getElementById("tenderForm");
+tenderForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Your form submission logic here
+    const formData = new FormData(tenderForm);
+    fetch('{{ url_for("add_tender") }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Handle successful submission
+            alert("Tender added successfully!");
+            closeAddTenderForm();
+        } else {
+            // Handle error
+            alert("Error adding tender: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Error submitting tender:", error);
+        alert("An error occurred while submitting the tender.");
+    });
+});
+
+function openAddTenderForm() {
+    document.getElementById("addTenderModal").style.display = "flex";
+}
+function result() {
+  const tenderId = sessionStorage.getItem('tenderID');
+  console.log("van", tenderId);
+
+  fetch('/result', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ tenderId: tenderId })
+  })
+  .then(response => {
+    if (response.ok) {
+      // Redirect to a page where the bid is shown or replace current content
+      response.text().then(html => {
+        // Replace current page content with the HTML from the backend
+        document.open();
+        document.write(html);
+        document.close();
+      });
+    } else {
+      // Handle errors
+      console.error('Error submitting bid:', response.statusText);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+
+function closeAddTenderForm() {
+    document.getElementById("addTenderModal").style.display = "none";
+}
+
+function showDetails(id, name, description, type, issueDate, submissionDeadline, status) {
+    document.getElementById("tenderNameDetail").innerText = "Tender Name: " + name;
+    document.getElementById("tenderDescriptionDetail").innerText = "Description: " + description;
+    document.getElementById("tenderTypeDetail").innerText = "Type: " + type;
+    document.getElementById("issueDateDetail").innerText = "Issue Date: " + issueDate;
+    document.getElementById("submissionDeadlineDetail").innerText = "Submission Deadline: " + submissionDeadline;
+    document.getElementById("statusDetail").innerText = "Status: " + status;
+    document.getElementById("tenderDetailsModal").style.display = "flex";
+}
+
+function closeTenderDetailsForm() {
+    document.getElementById("tenderDetailsModal").style.display = "none";
+}
+
+function toggleProfileMenu() {
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+function showUserDetails() {
+    fetch('{{ url_for("get_user_details") }}') // Make sure this endpoint returns user details as JSON
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("userLegalNameDetail").innerText = "Legal Name: " + data.lgnm;
+            document.getElementById("userPhoneNumberDetail").innerText = "Phone Number: " + data.phone_number;
+            document.getElementById("userGSTINDetail").innerText = "GSTIN: " + data.gstin;
+            document.getElementById("userStateDetail").innerText = "State, Zone, and Range: " + data.stj;
+            document.getElementById("userBusinessNatureDetail").innerText = "Nature of Business: " + data.ntcrbs;
+            document.getElementById("userDutyTypeDetail").innerText = "Duty Type: " + data.dty;
+            document.getElementById("userConstitutionDetail").innerText = "Constitution: " + data.ctb;
+            document.getElementById("userTradeNameDetail").innerText = "Trade Name: " + data.trade_name;
+            document.getElementById("userRegistrationDateDetail").innerText = "Registration Date: " + data.registration_date;
+            document.getElementById("userStatusDetail").innerText = "Status: " + data.status;
+            document.getElementById("userDetailsModal").style.display = "flex";
+        })
+        .catch(error => console.error('Error fetching user details:', error));
+}
+
+function closeUserDetailsForm() {
+    document.getElementById("userDetailsModal").style.display = "none";
+}
+
+const addTenderModal = document.getElementById("addTenderModal");
+const tenderDetailsModal = document.getElementById("tenderDetailsModal");
+const userDetailsModal = document.getElementById("userDetailsModal"); // Add if including user details modal
+
+window.onclick = function(event) {
+    if (event.target === addTenderModal) {
+        closeAddTenderForm();
+    } else if (event.target === tenderDetailsModal) {
+        closeTenderDetailsForm();
+    } else if (event.target === userDetailsModal) { // Add check for user details modal if included
+        closeUserDetailsForm();
+    }
+};
+    </script>
+</body>
+</html>

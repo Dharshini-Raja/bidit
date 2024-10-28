@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Details</title>
+    <style>
+      body {
+          background: url(/static/img/bg.jpeg) no-repeat center center fixed;
+          background-size: cover;
+          animation: myAnimation 10s infinite;
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          color: #333; /* Dark text color */
+      }
+
+      @keyframes myAnimation {
+          0% {
+              background-position: 0% 0%;
+          }
+          100% {
+              background-position: 100% 100%;
+          }
+      }
+
+      .logo {
+          width: 10%; /* Adjust the width as needed */
+          height: auto;
+          margin-right: 40px;
+      }
+
+      .container {
+          background-color: rgba(0, 0, 0, 0.7); /* Translucent black background */
+          padding: 40px;
+          border-radius: 5px;
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+          width: 550px; /* Adjust width as needed */
+          text-align: center;
+      }
+
+      h2 {
+          color: white;
+          margin-bottom: 20px;
+      }
+
+      label {
+          display: inline-block; /* Display label inline */
+          width: 20%; /* Adjust label width as needed */
+          margin-bottom: 5px;
+          color: white;
+          text-align: right; /* Align label text to the right */
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="tel"] {
+          width: 70%; /* Adjust input width as needed */
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          margin-bottom: 10px;
+          color: black;
+      }
+
+      button[type="submit"] {
+          background-color: #7ec0ee;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          width: 60%; /* Make button full width */
+      }
+
+      button[type="submit"]:hover {
+          background-color: #648fae;
+      }
+
+      a,p {
+          text-decoration: none;
+          color: white;
+          text-align: center; /* Center the link */
+          display: block; /* Make it a block element for better styling */
+          margin-top: 10px; /* Add spacing */
+      }
+
+      header {
+          background-color: white;
+          text-align: center;
+          padding: 20px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1;
+          max-width: 100%; /* Adjust the maximum width of the header */
+          margin: 0 auto; /* Center the header */
+      }
+
+      .content {
+          margin-top: 100px; /* Adjust for header height */
+          display: flex;
+          justify-content: center;
+      }
+  </style>
+</head>
+<body>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li class="flash-error">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+ 
+  <header>
+    <img src="/static/img/logo.jpeg" alt="Bid-It Logo" class="logo">
+  </header>
+  <form class="container" method="post" action="{{ url_for('vendor_dashboard') }}">
+    {% if details %}
+    <h2>Business Details</h2>
+    <p>GST exists under the name: <b>{{ details.data.lgnm }}</b></p>
+  {% else %}
+    <h2>Invalid GSTIN</h2>
+  {% endif %}
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" id="confirm_password" name="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and atleast 8 characters" required><br>
+    <label for="phone_number">Phone Number:</label>
+    <input type="tel" id="phone_number" name="phone_number" pattern="[0-9]{10}" required><br><br>
+    <button type="submit">Register</button>
+  </form>
+  <script>
+    const confirmPasswordInput = document.getElementById('confirm_password');
+    const passwordInput = document.getElementById('password');   
+  
+    const form = document.querySelector('form');
+  
+    confirmPasswordInput.addEventListener('input', () => {
+      if (confirmPasswordInput.value !== passwordInput.value) {
+        confirmPasswordInput.setCustomValidity('Passwords do not match');
+      } else {
+        confirmPasswordInput.setCustomValidity('');
+      }
+    });
+  
+    form.addEventListener('submit', (event) => {
+      if (confirmPasswordInput.value !== passwordInput.value) {
+        event.preventDefault();
+        alert('Passwords do not match');
+        form.reset(); // Reset form fields
+      }
+    });
+  </script>
+  
+</body>
+</html>

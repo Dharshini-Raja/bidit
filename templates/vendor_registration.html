@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendor Verification</title>
+    <style>
+        body {
+            background: url(/static/img/bg.jpeg) no-repeat center center fixed;
+            background-size: cover;
+            animation: myAnimation 10s infinite;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333; /* Dark text color */
+        }
+
+        @keyframes myAnimation {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .logo {
+            width: 10%; /* Adjust the width as needed */
+            height: auto;
+            margin-right: 40px;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Translucent black background */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 350px; /* Adjust width as needed */
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            color: black;
+        }
+
+        button[type="submit"] {
+            background-color: #7ec0ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 60%; /* Make button full width */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #648fae;
+        }
+
+        a,p {
+            text-decoration: none;
+            color: white;
+            text-align: center; /* Center the link */
+            display: block; /* Make it a block element for better styling */
+            margin-top: 10px; /* Add spacing */
+        }
+
+        header {
+            background-color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            max-width: 100%; /* Adjust the maximum width of the header */
+            margin: 0 auto; /* Center the header */
+        }
+
+        .content {
+            margin-top: 100px; /* Adjust for header height */
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/static/img/logo.jpeg" alt="Bid-It Logo" class="logo">
+    </header>
+    
+    <form method="POST" class = "container" action="/business_details">
+        <h2>Vendor Verification</h2>
+        <label for="gstin">Enter the GSTIN:</label>
+        <input type="text" id="gstin" name="gstin" required>
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>

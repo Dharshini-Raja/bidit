@@ -1,0 +1,24 @@
+02d98be75e235560126d87e0df5a497e - id
+09AAACH7409R1ZZ - gstin
+65835155c9msh04b463b72b6f029p124d98jsnd0a87f344346 - rapidapi
+
+import requests
+
+url = "https://phonenumbervalidatefree.p.rapidapi.com/ts_PhoneNumberValidateTest.jsp"
+
+querystring = {"number":"+59894887799","country":"UY"}
+
+headers = {
+	"x-rapidapi-key": "65835155c9msh04b463b72b6f029p124d98jsnd0a87f344346",
+	"x-rapidapi-host": "phonenumbervalidatefree.p.rapidapi.com"
+}
+
+response = requests.get(url, headers=headers, params=querystring)
+
+print(response.json())
+
+
+rec code: twilio: FHFSD9K6WBY6SC6ALZDW2T1Y
+
+sid: AC967966e65a3efbd51d3467b07cb382f6
+auth: 65bdb6619f9ab8a617e7617460f778f5

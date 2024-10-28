@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bid-It</title>
+<style>
+/* Your CSS styles here */
+body {
+    background: url(/static/img/bg.jpeg) no-repeat center center fixed;
+    background-size: cover;
+    animation: myAnimation 10s infinite;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Make the body a flex container */
+    min-height: 100vh;
+    color: #333; /* Dark text color */
+}
+
+@keyframes myAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+.content-section {
+    display: none;
+}
+#welcome {
+    display: block;
+}
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: white; /* Set header background to white */
+    color: #111;
+    position: relative; /* Make header position relative */
+    z-index: 2; /* Ensure header is above navigation */
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Horizontally center content */
+}
+
+
+
+
+nav {
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black navigation */
+    width: 40%;
+    padding: 20px;
+    position: fixed; /* Make the navigation fixed */
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1; /* Ensure navigation is below header */
+    display: flex; /* Make nav a flex container */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center items horizontally */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Make the navigation items display one by one */
+    justify-content: center;
+}
+
+nav li {
+    margin-bottom: 20px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+}
+
+#content {
+    flex-grow: 1;
+    padding: 200px;
+    overflow-y: scroll; /* Enable scrolling for the content area */
+    text-align: center;
+    margin-left: 40%; /* Adjust for navigation width*/
+    color: black; /* Set text color to black */
+}
+
+
+section {
+    margin-bottom: 1000px;
+}
+
+h2 {
+    color: #111;
+    font-size: 28px;
+}
+
+p {
+    color: #504e4e;
+    line-height: 1.5;
+}
+
+.logo {
+    width: 10%; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 40px;
+}
+
+button {
+    background-color: #7ec0ee; /* Pastel blue */
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #5ca8db; /* Darker pastel blue */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+
+</head>
+<body>
+<header>
+    <img src="/static/img/logo.jpeg" alt="Bid-It Logo" class="logo">
+</header>
+
+<div class="container">
+    <nav>
+        <ul>
+            <li><a href="#welcome">Welcome</a></li>
+            <li><a href="#what-we-do">What We Do</a></li>
+            <li><a href="#your-role">Your Role</a></li>
+        </ul>
+    </nav>
+
+    <section id="content">
+      <section id="welcome" class="content-section">
+
+            <h2>Welcome to Bid-It!</h2>
+            <p>Ready to bid or tender? You've come to the right place!</p>
+        </section>
+
+        <section id="what-we-do" class="content-section">
+            <h2>What We Do</h2>
+            <p>We provide exceptional services in the following areas:</p>
+            <ul>
+                <li>Hosting tenders</li>
+                <li>Platform to bid on tenders</li>
+                <li>Compute the best bidder for a tender</li>
+            </ul>
+        </section>
+
+        <section id="your-role">
+            <h2>Your Role</h2>
+            <p>Select your role:</p>
+            <button class="vendor-button">Vendor</button>
+            <button class="bidder-button">Bidder</button>
+        </section>
+    </section>
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $('nav a').click(function(e) {
+    e.preventDefault();
+    const targetId = $(this).attr('href').substring(1);
+    $('.content-section').hide();
+    $('#' + targetId).show();
+  });
+  $('button').click(function() {
+    // Assuming the button with the text "Vendor" has the class "vendor-button"
+    if ($(this).hasClass('vendor-button')) {
+      window.location.href = 'vendor_login_page'; // Replace with actual URL
+
+    }
+    if ($(this).hasClass('bidder-button')) {
+
+            window.location.href = 'bidder_login_page'; // Replace with actual URL
+    }
+});
+</script>
+</html>
