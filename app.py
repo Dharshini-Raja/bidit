@@ -15,7 +15,8 @@ conn = psycopg2.connect(
     dbname="Bid",
     user="postgres",
     password="postgres",
-    host="localhost"
+    host="localhost",
+    port="5432"
 )
 cur = conn.cursor()
 
